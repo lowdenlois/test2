@@ -1,0 +1,34 @@
+<!-- tabs.component.html -->
+<ul class="nav nav-tabs">
+  <li class="nav-item" *ngFor="let tab of tabs; let i = index" (click)="selectTab(tab)">
+    <a class="nav-link" [class.active]="tab.active" [id]="'tab-' + i">{{tab.title}}</a>
+  </li>
+</ul>
+
+<div class="tab-content">
+  <ng-container *ngFor="let tab of tabs; let i = index">
+    <!-- <code> {{tab.form | json }} </code> -->
+    <div class="tab-pane" [class.active]="tab.active" [id]="'tab-' + i + '-content'">
+      <form [formGroup]="tab.form" (ngSubmit)="onFormSubmit(tab.form)">
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input type="text" class="form-control" id="firstName" formControlName="firstName">
+          <!-- <div *ngIf="tab.form.get('firstName').invalid && (tab.form.get('firstName').dirty || tab.form.get('firstName').touched)">
+            <small class="form-text text-danger">First Name is required.</small>
+          </div> -->
+        </div>
+
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input type="text" class="form-control" id="lastName" formControlName="lastName">
+          <!-- <div *ngIf="tab.form.get('lastName').invalid && (tab.form.get('lastName').dirty || tab.form.get('lastName').touched)">
+            <small class="form-text text-danger">Last Name is required.</small>
+          </div> -->
+        </div>
+
+      
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </ng-container>
+</div>
